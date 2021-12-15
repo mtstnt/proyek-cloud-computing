@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostTag extends Model
 {
-    use HasFactory, Unguarded;
+    use HasFactory;
+    protected $guarded = [];
 }

@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use HasFactory, Unguarded;
+    use HasFactory;
 }

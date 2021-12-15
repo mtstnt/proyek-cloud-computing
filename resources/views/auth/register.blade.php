@@ -4,6 +4,7 @@
 
 <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
 	<form action="{{ route('auth.register.store') }}" class="card p-5 col-11 col-sm-5 shadow" method="POST">
+		@csrf
 		<div class="card-body">
 			<h1 class="fs-large mb-4 px-0">Create New Account <br> for {{ env('APP_NAME') }}</h1>
 			<div class="row mb-3 mx-0">

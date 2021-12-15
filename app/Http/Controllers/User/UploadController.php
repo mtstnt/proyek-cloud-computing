@@ -40,7 +40,6 @@ class UploadController extends Controller
         });
 
 
-
         return redirect()->route('main.upload.index');
     }
 

@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    use HasFactory, Unguarded;
+    use HasFactory;
+
+    protected $guarded = [];
 }
