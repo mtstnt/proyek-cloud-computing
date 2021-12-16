@@ -136,7 +136,7 @@
 		bottom: 0;
 	}
 </style>
-<button class="refresh btn btn-success text-white rounded-circle m-4" style="aspect-ratio: 1 / 1; width: 60px" onclick="loadPosts">
+<button class="refresh btn btn-success text-white rounded-circle m-4" style="aspect-ratio: 1 / 1; width: 60px" onclick="loadPosts()">
 	<i class="fas fa-sync"></i>
 </button>
 
@@ -299,6 +299,7 @@
 			clearInterval(int);
 			uploadButton.disabled = false;
 			showUploading.style.display = 'none';
+			loadPosts();
 		}
 		else {
 			uploadButton.disabled = true;
