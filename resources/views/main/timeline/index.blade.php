@@ -198,18 +198,18 @@
 		</div>
 	</div>
 
-	<style>
-		.refresh {
-			position: fixed;
-			right: 0;
-			bottom: 0;
-		}
-	</style>
-	<button class="refresh btn btn-success text-white rounded-circle m-4" style="aspect-ratio: 1 / 1; width: 60px" onclick="loadPosts">
-		<i class="fas fa-sync"></i>
-	</button>
-
 </template>
+
+<style>
+	.refresh {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+	}
+</style>
+<button class="refresh btn btn-success text-white rounded-circle m-4" style="aspect-ratio: 1 / 1; width: 60px" onclick="loadPosts">
+	<i class="fas fa-sync"></i>
+</button>
 @endsection
 
 @section("js")
@@ -238,21 +238,24 @@
 
 		for (let post of postsJson) {
 			const template = cardTmpl.content;
+			const card = template.cloneNode(true);
 
-			template.querySelector('.user').innerText = post.user.username;
-			template.querySelector('.date').innerText = post.date;
-			template.querySelector('.caption').innerText = post.caption;
+			cards.appendChild(card);
+
+			const c = cards.children[cards.children.length - 1];
+
+			c.querySelector('.user').innerText = post.user.username;
+			c.querySelector('.date').innerText = post.date;
+			c.querySelector('.caption').innerText = post.caption;
 
 			if (post.url.split('.').pop() == 'mp4') {
-				template.querySelector('.video').src = post.url;
-				template.querySelector('.video').classList.remove('d-none');
+				c.querySelector('.video').src = post.url;
+				c.querySelector('.video').classList.remove('d-none');
 			}
 			else {
-				template.querySelector('.image').src = post.url;
-				template.querySelector('.image').classList.remove('d-none');
+				c.querySelector('.image').src = post.url;
+				c.querySelector('.image').classList.remove('d-none');
 			}
-
-			cards.appendChild(template.cloneNode(true));
 		}
 	}
 
