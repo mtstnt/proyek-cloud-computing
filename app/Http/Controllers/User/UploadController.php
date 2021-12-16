@@ -100,13 +100,13 @@ class UploadController extends Controller
             ]);
 
             // Send SNS notification for file
-            $sns->publish([
-                'Message' => json_encode([
-                    'Filename' => $filename,
-                    'UploadStatusID' => $post->id,
-                ]),
-                'TopicArn' => $topicArn,
-            ]);
+            // $sns->publish([
+            //     'Message' => json_encode([
+            //         'Filename' => $filename,
+            //         'UploadStatusID' => $post->id,
+            //     ]),
+            //     'TopicArn' => $topicArn,
+            // ]);
 
             DB::commit();
         } 
