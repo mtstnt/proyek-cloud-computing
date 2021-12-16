@@ -36,4 +36,5 @@ Route::prefix('my')->middleware('auth')->group(function() {
     Route::post('upload', [UploadController::class, 'store'])->name('main.upload.store');
 
     Route::post('/get_posts', [TimelineController::class, 'getPosts'])->name('main.timeline.get_posts');
+    Route::post('/get_uploaded_status', [TimelineController::class, 'getUploadedStatus'])->name('main.timeline.get_uploaded_status');
 });

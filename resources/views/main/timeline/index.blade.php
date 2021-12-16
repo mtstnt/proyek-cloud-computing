@@ -76,7 +76,7 @@
 				<div class="d-flex flex-column justify-content-center w-100 mx-auto" style="padding-top: 56px; max-width: 680px">
 
 					@include("template.notice")
-					<div class="alert alert-success d-none mt-3 shadow">Uploading your content! Please wait...</div>
+					<div id="show-uploading" class="alert alert-success mt-3 shadow" style="display: none;">One of your content is still uploading! Please wait...</div>
 
 					<div class="bg-white p-3 mt-3 rounded border shadow">
 						<!-- avatar -->
@@ -84,7 +84,7 @@
 							<div class="p-1">
 								<img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
 							</div>
-							<input type="text" class="form-control rounded-pill px-4 border-0 bg-gray pointer" disabled placeholder="What's happening?" data-bs-toggle="modal" data-bs-target="#createModal" />
+							<button id="upload-button" class="form-control text-start rounded-pill px-4 border-0 bg-gray pointer" data-bs-toggle="modal" data-bs-target="#createModal">What's happening?</button>
 						</div>
 						<!-- create modal -->
 						<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true" data-bs-backdrop="false">
@@ -214,10 +214,33 @@
 
 @section("js")
 <script>
+	const uploadButton = document.getElementById('upload-button');
+
 	const url = "{{ route('main.timeline.get_posts') }}";
+	const pullUrl = "{{ route('main.timeline.get_uploaded_status') }}"
+
+	const showUploading = document.getElementById('show-uploading')
 
 	const cards = document.getElementById('cards');
 	const cardTmpl = document.getElementById('card-tmpl');
+
+	async function pullUploadInformation() {
+		const uploadStatus = await fetch(pullUrl, {
+			method: 'POST',
+			headers: {
+				'X-CSRF-TOKEN': "{{ csrf_token() }}",
+			},
+			body: JSON.stringify({
+				_token: "{{ csrf_token() }}",
+			}),
+		});
+
+		const uploadStatusJson = await uploadStatus.json();
+
+		console.log(uploadStatusJson);
+
+		return !(uploadStatusJson['url'] == null || uploadStatusJson['caption'] == null)
+	}
 
 	async function loadPosts() {
 		cards.innerHTML = "<h3 class='my-4 text-center'>Loading...</h3>";
@@ -250,6 +273,7 @@
 
 			if (post.url.split('.').pop() == 'mp4') {
 				c.querySelector('.video').src = post.url;
+				c.querySelector('.video').load();
 				c.querySelector('.video').classList.remove('d-none');
 			}
 			else {
@@ -260,6 +284,24 @@
 	}
 
 	loadPosts();
+	pullUploadInformation();
+
+	let int = setInterval(async () => {
+		let isUploaded = await pullUploadInformation();
+
+		console.log(isUploaded);
+
+		if (isUploaded) {
+			clearInterval(int);
+			uploadButton.disabled = false;
+			showUploading.style.display = 'none';
+		}
+		else {
+			uploadButton.disabled = true;
+			showUploading.style.display = 'block';
+		}
+
+	}, 3000);
 </script>
 
 @endsection
