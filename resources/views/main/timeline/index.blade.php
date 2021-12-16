@@ -161,7 +161,7 @@
 					Quae fuga incidunt consequatur tenetur doloremque officia
 					corrupti provident tempore vitae labore?
 				</p>
-				<video src="" class="img-fluid rounded video d-none"></video>
+				<video controls src="" class="img-fluid rounded video d-none"></video>
 				<img src="https://source.unsplash.com/random/12" alt="post image" class="img-fluid rounded image d-none" />
 			</div>
 			<!-- likes & comments -->
