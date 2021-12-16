@@ -48,7 +48,7 @@ class TimelineController extends Controller
             ->first();
 
         if (! $uploading) {
-            return response()->json(null);
+            return response()->json(false);
         }
 
         return response()->json($uploading);

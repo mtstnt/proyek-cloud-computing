@@ -241,7 +241,7 @@
 
 		console.log(uploadStatusJson);
 
-		if (uploadStatusJson == null) return true;
+		if (uploadStatusJson === false) return true;
 
 		return !(uploadStatusJson['url'] == null || uploadStatusJson['caption'] == null)
 	}
