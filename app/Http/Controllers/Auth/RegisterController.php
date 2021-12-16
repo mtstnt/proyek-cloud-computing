@@ -10,14 +10,10 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function index() {
-        return view('auth.register');
-    }
-
     public function store(Request $request) {
         $request->validate([
             'username' => 'required|unique:users,username',
-            'password' => 'required|max:12'
+            'password' => 'required|confirmed|max:12'
         ]);
 
         $user = User::create([

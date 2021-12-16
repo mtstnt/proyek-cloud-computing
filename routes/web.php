@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('auth')->group(function() {
-    Route::get('login', [LoginController::class, 'index'])->name('auth.login.index');
-    Route::get('register', [RegisterController::class, 'index'])->name('auth.register.index');
+    Route::get('/', [LoginController::class, 'index'])->name('auth.login.index');
 
     Route::post('login', [LoginController::class, 'store'])->name('auth.login.store');
     Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store');
