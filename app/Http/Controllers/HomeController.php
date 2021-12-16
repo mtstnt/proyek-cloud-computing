@@ -10,6 +10,8 @@ class HomeController extends Controller
     public function index() {
         if (Auth::check()) {
             return redirect()->route('main.timeline.index');
-        }
+	}
+
+	return "Hello world!";
     }
 }
