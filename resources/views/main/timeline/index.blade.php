@@ -129,6 +129,17 @@
 	</div>
 </div>
 
+<style>
+	.refresh {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+	}
+</style>
+<button class="refresh btn btn-success text-white rounded-circle m-4" style="aspect-ratio: 1 / 1; width: 60px" onclick="loadPosts">
+	<i class="fas fa-sync"></i>
+</button>
+
 <template id="card-tmpl">
 
 	<div class="bg-white p-4 rounded shadow mt-3">
@@ -200,16 +211,7 @@
 
 </template>
 
-<style>
-	.refresh {
-		position: fixed;
-		right: 0;
-		bottom: 0;
-	}
-</style>
-<button class="refresh btn btn-success text-white rounded-circle m-4" style="aspect-ratio: 1 / 1; width: 60px" onclick="loadPosts">
-	<i class="fas fa-sync"></i>
-</button>
+
 @endsection
 
 @section("js")
@@ -238,6 +240,8 @@
 		const uploadStatusJson = await uploadStatus.json();
 
 		console.log(uploadStatusJson);
+
+		if (uploadStatusJson == null) return true;
 
 		return !(uploadStatusJson['url'] == null || uploadStatusJson['caption'] == null)
 	}

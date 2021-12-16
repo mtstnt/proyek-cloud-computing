@@ -47,6 +47,10 @@ class TimelineController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
 
+        if (! $uploading) {
+            return response()->json(null);
+        }
+
         return response()->json($uploading);
     }
 }
