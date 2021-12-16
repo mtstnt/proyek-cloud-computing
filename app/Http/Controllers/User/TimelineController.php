@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\UploadStatus;
 use Illuminate\Http\Request;
 
 class TimelineController extends Controller
@@ -24,7 +25,9 @@ class TimelineController extends Controller
 
     public function getPosts()
     {
-        $posts = Post::query()
+        $posts = UploadStatus::query()
+            ->whereNotNull('url')
+            ->whereNotNull('caption')
             ->orderBy('created_at', 'desc')
             ->get();
 
