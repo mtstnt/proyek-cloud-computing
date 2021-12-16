@@ -239,7 +239,7 @@
 		for (let post of postsJson) {
 			const template = cardTmpl.content;
 
-			template.querySelector('.user').innerText = post.user;
+			template.querySelector('.user').innerText = post.user.username;
 			template.querySelector('.date').innerText = post.date;
 			template.querySelector('.caption').innerText = post.caption;
 
