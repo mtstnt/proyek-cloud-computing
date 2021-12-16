@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\UploadStatus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TimelineController extends Controller
@@ -26,10 +27,15 @@ class TimelineController extends Controller
     public function getPosts()
     {
         $posts = UploadStatus::query()
+            ->with('user')
             ->whereNotNull('url')
             ->whereNotNull('caption')
             ->orderBy('created_at', 'desc')
             ->get();
+
+        foreach ($posts as $p) {
+            $p->date = Carbon::createFromTimestamp($p->date)->format('d M Y');
+        }
 
         return response()->json($posts);
     }

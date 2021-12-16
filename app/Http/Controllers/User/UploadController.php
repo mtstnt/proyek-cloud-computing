@@ -112,10 +112,10 @@ class UploadController extends Controller
         } 
         catch (Exception $e) {
             DB::rollBack();
-            return redirect()->route('main.upload.index')->with('error', 'Error: ' . $e->getMessage());
+            return redirect()->route('main.timeline.index')->with('error', 'Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('main.upload.index')->with('ok', "Upload is ongoing!");
+        return redirect()->route('main.timeline.index')->with('ok', "Upload is ongoing!");
     }
 
     public function getUploadStatus(Request $request)

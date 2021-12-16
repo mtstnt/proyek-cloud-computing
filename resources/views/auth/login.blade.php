@@ -2,7 +2,7 @@
 
 @section("body")
 
-<body class="bg-gray">
+<div class="bg-gray">
     <!-- Login -->
     <div class="container d-flex justify-content-center align-items-center min-vh-100 flex-sm-row flex-column">
         <!-- heading -->
@@ -72,6 +72,6 @@
             </div>
         </div>
     </div>
-</body>
+</div>
 
 @endsection
