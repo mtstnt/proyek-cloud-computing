@@ -25,7 +25,7 @@ class TimelineController extends Controller
     public function getPosts()
     {
         $posts = Post::query()
-            ->orderBy('date', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return response()->json($posts);

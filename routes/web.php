@@ -35,4 +35,6 @@ Route::prefix('my')->middleware('auth')->group(function() {
 
     Route::get('upload', [UploadController::class, 'index'])->name('main.upload.index');
     Route::post('upload', [UploadController::class, 'store'])->name('main.upload.store');
+
+    Route::post('/get_posts', [TimelineController::class, 'getPosts'])->name('main.timeline.get_posts');
 });

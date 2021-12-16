@@ -9,6 +9,7 @@
 			<div class="row mb-3">
 				<div class="w-100 text-center" style="background-color: #ddd">
 					<img src="" id="image-result" class="d-none rounded" alt="" style="max-width: 500px; max-height: 800px">
+					<video src="" id="video-result" class="d-none rounded" style="max-width: 500px; max-height: 800px"></video>
 				</div>
 				<div id="cover" class="w-100 rounded" style="height: 500px; background-color: #ddd"></div>
 				<p id="info-area" class="mt-3 d-none"></p>
@@ -38,16 +39,16 @@
 	var infoArea = document.getElementById('info-area');
 	var cover = document.getElementById('cover');
 	var imageResult = document.getElementById('image-result');
+	var videoResult = document.getElementById('video-result');
+
+	const extImg = ['jpg', 'jpeg', 'png'];
+	const extVideo = ['mp4']
 
 	upload.addEventListener('change', (event) => {
 		readURL(upload);
 		var input = event.srcElement;
 		var fileName = input.files[0].name;
 		infoArea.textContent = 'Uploaded: ' + fileName;
-
-		imageResult.classList.remove('d-none');
-		cover.classList.add('d-none');
-		infoArea.classList.remove('d-none');
 	});
 
 	function readURL(input) {
@@ -55,7 +56,21 @@
 			var reader = new FileReader();
 
 			reader.onload = function (e) {
-				imageResult.src = e.target.result;
+				var extension = input.files[0].name.split('.').pop().toLowerCase();
+
+				cover.classList.add('d-none');
+				infoArea.classList.remove('d-none');
+
+				if (extImg.indexOf(extension) > -1) {
+					videoResult.classList.add('d-none');
+					imageResult.classList.remove('d-none');
+					imageResult.src = e.target.result;
+				}
+				else {
+					videoResult.classList.remove('d-none');
+					imageResult.classList.add('d-none');
+					videoResult.src = e.target.result;
+				}
 			};
 			reader.readAsDataURL(input.files[0]);
 		}

@@ -7,6 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>{{ $title ?? env("APP_NAME") }}</title>
 
+	<meta name="_token" content="{{ csrf_token() }}">
+
 	{{-- SEO TAGS --}}
 
 

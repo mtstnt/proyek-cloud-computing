@@ -30,7 +30,7 @@ class UploadController extends Controller
             'upload' => 'required|file|mimes:jpg,jpeg,png,mp4',
         ]);
 
-        $filename = uniqid("raw_", true);
+        $filename = uniqid("", true);
         $uploadFile = $request->file('upload');
         $topicArn = "";
 
@@ -90,14 +90,14 @@ class UploadController extends Controller
                 ]
             ]);
 
-            // // Send SNS notification for caption filter
-            // $sns->publish([
-            //     'Message' => json_encode([
-            //         'Caption' => $request->caption,
-            //         'UploadStatusID' => $post->id,
-            //     ]),
-            //     'TopicArn' => env("TOPIC_ARN_CAPTION_FILTER")
-            // ]);
+            // Send SNS notification for caption filter
+            $sns->publish([
+                'Message' => json_encode([
+                    'Caption' => $request->caption,
+                    'UploadStatusID' => $post->id,
+                ]),
+                'TopicArn' => env("TOPIC_ARN_CAPTION_FILTER")
+            ]);
 
             // Send SNS notification for file
             $sns->publish([
