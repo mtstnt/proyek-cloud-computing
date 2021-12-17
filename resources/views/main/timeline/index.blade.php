@@ -39,7 +39,7 @@
 						<li class="dropdown-item p-1 rounded d-flex" type="button">
 							<img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="rounded-circle me-2" style="width: 45px; height: 45px; object-fit: cover" />
 							<div>
-								<p class="m-0">Michael Kevin</p>
+								<p class="m-0">{{ Auth::user()->username }}</p>
 							</div>
 						</li>
 						<hr />
@@ -144,7 +144,7 @@
 			<div class="d-flex">
 				<img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="avatar rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
 				<div>
-					<p class="m-0 fw-bold user">Michael Kevin</p>
+					<p class="m-0 fw-bold user">{{ Auth::user()->username }}</p>
 					<span class="text-muted fs-7 date">July 17 at 1:23 pm</span>
 				</div>
 			</div>
