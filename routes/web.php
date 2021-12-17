@@ -26,6 +26,8 @@ Route::prefix('auth')->group(function() {
 
     Route::post('login', [LoginController::class, 'store'])->name('auth.login.store');
     Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store');
+
+    Route::post('logout', [LoginController::class, 'logout'])->name('auth.logout.index');
 });
 
 Route::prefix('my')->middleware('auth')->group(function() {

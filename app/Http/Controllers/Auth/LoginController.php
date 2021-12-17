@@ -28,4 +28,10 @@ class LoginController extends Controller
 
         return redirect()->route('main.timeline.index');
     }
+
+    public function logout() {
+        Auth::logout();
+
+        return redirect()->route('auth.login.index');
+    }
 }

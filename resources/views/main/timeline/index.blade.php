@@ -47,18 +47,13 @@
 						<li class="dropdown-item p-1 my-3 rounded" type="button">
 							<ul class="navbar-nav">
 								<li class="nav-item">
-									<a href="./index.html" class="d-flex text-decoration-none text-dark">
+									<form id="logout-form" action="{{ route("auth.logout.index") }}" class="d-flex text-decoration-none text-dark" method="POST">
+										@csrf
 										<i class="fas fa-cog bg-gray p-2 rounded-circle"></i>
-										<div class="
-							ms-3
-							d-flex
-							justify-content-between
-							align-items-center
-							w-100
-						  ">
-											<p class="m-0">Log Out</p>
+										<div class="ms-3 d-flex justify-content-between align-items-center w-100">
+											<p id="logout-btn" class="m-0">Log Out</p>
 										</div>
-									</a>
+									</form>
 								</li>
 							</ul>
 						</li>
@@ -307,6 +302,10 @@
 		}
 
 	}, 3000);
+
+	document.getElementById('logout-btn').onclick = (e) => {
+		document.getElementById('logout-form').submit();
+	}
 </script>
 
 @endsection
